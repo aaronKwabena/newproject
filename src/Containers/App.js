@@ -1,66 +1,70 @@
 //Librairies
-import React, {Component} from 'react';
-//impot feuille de style
+import React,{ useState,useEffect } from 'react';
+//import feuille de style
 import './App.css';
 //Composants
 import Eleve from '../Components/Eleves/Eleve';
 
-class App extends Component {
-  constructor (props){
-    super(props);
-    console.log('[App.js] Constructor')
-  }
-//Monté -> lorsque l'on branche
-componentDidMount(){
-  console.log('[App.js] ComponentDidMount');
-  }
+function App() {
+  //states
+  const [eleves, setEleves]=useState(
+    [{
+      nom: 'Eva Dupont',
+      moyenne: 15,
+      citation: "Aller toujours plus loin"
+    },
+    {
+      nom: 'Elon Musk',
+      moyenne: 5,
+      citation: "le feu ça brule et l'eau ça mouille"
+    }]
+  );
 
-  state={
-    eleves:[
-      {
-        nom:'Eva Dupont', 
-        moyenne:'15',
-        citation:"Allez toujours plus loin"},
-      {
-        nom:'Elon Musk', 
-        moyenne:'20',
-        citation:"Le feu ça brule et l'eau ça mouille"}
-    ]
-  }
-  //Methodes
-  buttonClickedHandler = () => {
-    const nouveauState = [...this.state.eleves];
-    nouveauState[0].nom="Steve Jobs"
-    this.setState({
-    ...this.state,
-    eleves:nouveauState
-    })
+  const [transformation,setTransformation]=useState(false);
+  const [afficherEleve,setAfficherEleve]=useState(true);
+  //UseEffects
+  useEffect(() => {
+    console.log('[App.js] UseEffect');
+
+    return () => {
+      console.log('[App.js] UseEffect(didUnmount)');
     }
-  //Jsx 
-  render(){
-    return (
-      <div className="App">
-        <h1>Bienvenue dans la classe Terre</h1>
+  }, []);
 
-        <div>
-          <button onClick={this.buttonClickedHandler.bind(this,"Elon Musk")}>Transformer le premier élève</button>
-        </div>
+  useEffect(() => {
+    console.log('[App.js] UseEffect(didUpdate)');
+  })
 
-        <Eleve 
-          nom={this.state.eleves[0].nom}
-          moyenne={this.state.eleves[0].moyenne}
-          citation={this.state.eleves[0].citation}
-          clic={this.buttonClickedHandler}>
-        </Eleve>
-        <Eleve 
-          nom={this.state.eleves[1].nom}
-          moyenne={this.state.eleves[1].moyenne}
-          citation={this.state.eleves[1].citation}
-          clic={this.buttonClickedHandler}>
-        </Eleve> 
+  //Méthodes
+  const buttonClickedHandler = nouveauNom => {
+    //on reprend le state d'avant et on le met dans la const nouveauState
+    const nouveauxEleves = [...eleves];
+    //on dit ici que le prénom de la première personne sera "Steve Jobs"
+    nouveauxEleves[0].nom = nouveauNom
+    //on envoie ça dans le nouveau state
+    setEleves(nouveauxEleves)
+  }
+  //jsx
+  return (
+    <div className="App">
+      <h1>Welcome dans la classe Terre</h1>
+      <div>
+        <button onClick={buttonClickedHandler.bind(this, "Steve Jobs")}>Transformer le premier élève</button>
       </div>
-    );
-  }  
-}
+      <Eleve
+        nom={eleves[0].nom}
+        moyenne={eleves[0].moyenne}
+        clic={() => buttonClickedHandler('Julie Martin')}>
+        citation={eleves[0].citation}
+      </Eleve>
+      <Eleve
+        nom={eleves[1].nom}
+        moyenne={eleves[1].moyenne}
+        clic={() => buttonClickedHandler('Thomas Dutronc')}>
+        citation={eleves[1].citation}
+      </Eleve>
+    </div>
+  )
+  }
 
 export default App;
