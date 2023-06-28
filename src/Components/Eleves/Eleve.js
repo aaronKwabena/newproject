@@ -37,6 +37,7 @@ function Eleve(props) {
         if(props.moyenne<6){
             message=<p>Cet élève va redoubler</p>
         }
+    
 
     //jsx
     return (

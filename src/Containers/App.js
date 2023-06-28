@@ -1,9 +1,11 @@
 import classes from './App.module.css';
 import React,{ useState, useEffect } from 'react';
 import styledComponent from 'styled-components';
-
+import MonFragment from '../HOC/MonFragment/MonFragment';
 //import eleve.js
 import Eleve from '../Components/Eleves/Eleve';
+
+
 
 const MonBoutonSylise=styledComponent.button
   //code css
@@ -49,7 +51,7 @@ function App(){
   useEffect(()=>{
     console.log('[App.js] UseEffect(didUpdate)');
   })
-
+//Méthodes
   const buttonClickedHandler= nouveauNom =>{
     //on reprend le state d'avant et on le met dans la const nouveauState
     const nouveauxEleves = [...eleves];
