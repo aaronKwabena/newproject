@@ -1,5 +1,5 @@
 // Librairies
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import classes from './Eleve.module.css';
 
 function Eleve(props) {
@@ -37,8 +37,7 @@ function Eleve(props) {
         if(props.moyenne<6){
             message=<p>Cet élève va redoubler</p>
         }
-    
-
+   
     //jsx
     return (
         <div className={classes.eleve}>
@@ -47,6 +46,7 @@ function Eleve(props) {
             <p>Age : {Math.floor(Math.random() * 100)}</p>
             <i>{props.children}</i>
             {message}
+            <input ref={props.maRef} onChange={props.changerNom} type="text" value={props.nom}style={{width:'100%'}}/>
             <button onClick={props.supprimer} style={{marginTop:'5px'}}>Supprimer</button>
         </div>
     );
