@@ -1,6 +1,11 @@
 // Librairies
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useContext } from 'react';
+
+//import context-provider
+import { themeContext } from '../../Context/theme-context';
+
 import classes from './Eleve.module.css';
+
 
 function Eleve(props) {
     //useEffect
@@ -37,7 +42,9 @@ function Eleve(props) {
         if(props.moyenne<6){
             message=<p>Cet élève va redoubler</p>
         }
-   
+
+    const theme = useContext(themeContext);
+
     //jsx
     return (
         <div className={classes.eleve}>
@@ -46,7 +53,12 @@ function Eleve(props) {
             <p>Age : {Math.floor(Math.random() * 100)}</p>
             <i>{props.children}</i>
             {message}
-            <input ref={props.maRef} onChange={props.changerNom} type="text" value={props.nom}style={{width:'100%'}}/>
+            <input ref={props.maRef} onChange={props.changerNom} type="text" value={props.nom}
+            style={{
+                width:'100%',
+                background:theme.background,
+                color:theme.foreground
+                }}/>
             <button onClick={props.supprimer} style={{marginTop:'5px'}}>Supprimer</button>
         </div>
     );

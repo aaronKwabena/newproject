@@ -5,6 +5,8 @@ import styledComponent from 'styled-components';
 import MonFragment from '../HOC/MonFragment/MonFragment';
 //importsearch
 import Search from '../Components/Search/Search';
+//import context-provider
+import ThemeContextProvider from '../Context/theme-context';
 //import eleve.js
 import Eleve from '../Components/Eleves/Eleve';
 
@@ -117,25 +119,29 @@ function App(){
  
   //JSX
     return(
-      <div className={classes.App}>
-        <h1 style={h1Style}>Bienvenue dans la classe Terre</h1>
-        
-        <div>
-           <MonBoutonStylise transformed={transformation} onClick={buttonClickedHandler.bind(this,"Steve Jobs")}>Transformer le premier élève</MonBoutonStylise>
-        </div>
-        <div>
-          <MonBoutonStylise onClick={showHideHandler}>Afficher/Masquer</MonBoutonStylise>
-        </div>
-        <Search/>
+      <ThemeContextProvider>
 
-        {afficherEleve ?
-          <MonFragment>
-          {cartes}
-          </MonFragment>
-          :null
-        }
+        <div className={classes.App}>
+          <h1 style={h1Style}>Bienvenue dans la classe Terre</h1>
+
+          <div>
+            <MonBoutonStylise transformed={transformation} onClick={buttonClickedHandler.bind(this,"Steve Jobs")}>Transformer le premier élève</MonBoutonStylise>
+          </div>
+          <div>
+            <MonBoutonStylise onClick={showHideHandler}>Afficher/Masquer</MonBoutonStylise>
+          </div>
+          <Search/>
+
+          {afficherEleve ?
+            <MonFragment>
+            {cartes}
+            </MonFragment>
+            :null
+          }
+          
+        </div>
         
-      </div>
+      </ThemeContextProvider>
   );
 }
 
