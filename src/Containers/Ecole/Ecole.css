@@ -1,0 +1,17 @@
+.App {
+    text-align: center;
+  }
+
+.display{
+    display:flex;
+    justify-content: center;
+}
+
+button {
+  display: block;
+  margin: auto;
+}
+
+h1:hover{
+    color: blue;
+  }

@@ -44,22 +44,25 @@ function Eleve(props) {
         }
 
     const theme = useContext(themeContext);
-
+    let inputBackground
     //jsx
     return (
-        <div className={classes.eleve}>
-            <h1 onClick={props.clic}>{props.nom}</h1>
-            <p>Moyenne scolaire : <b className={moyenneClasse.join('')}>{props.moyenne}/20</b></p>
-            <p>Age : {Math.floor(Math.random() * 100)}</p>
-            <i>{props.children}</i>
-            {message}
-            <input ref={props.maRef} onChange={props.changerNom} type="text" value={props.nom}
-            style={{
-                width:'100%',
-                background:theme.background,
-                color:theme.foreground
-                }}/>
-            <button onClick={props.supprimer} style={{marginTop:'5px'}}>Supprimer</button>
+        <div background={inputBackground}>
+            <div className={classes.eleve}>
+                <h1 onClick={props.clic}>{props.nom}</h1>
+                <p>Moyenne scolaire : <b className={moyenneClasse.join('')}>{props.moyenne}/20</b></p>
+                <p>Age : {Math.floor(Math.random() * 100)}</p>
+                <i>{props.children}</i>
+                {message}
+                <input ref={props.maRef} 
+                        onChange={props.changerNom} 
+                        type="text" value={props.nom}
+                        style={{
+                            width:'100%',
+                            background:theme.background,
+                            color:theme.foreground}}/>
+                <button onClick={props.supprimer} style={{marginTop:'5px'}}>Supprimer</button>
+           </div>
         </div>
     );
 }
